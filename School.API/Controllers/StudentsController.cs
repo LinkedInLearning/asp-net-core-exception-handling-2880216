@@ -64,6 +64,8 @@ namespace School.API.Controllers
 
                 if(StudentIs20OrYounger(payload.DateOfBirth)) throw new StudentAgeException($"{payload.FullName} needs to be older than 20. Birth year: {payload.DateOfBirth.Year}");
 
+                throw new Exception("This is just a test");
+
                 _context.Students.Add(payload);
                 _context.SaveChanges();
 
@@ -73,10 +75,14 @@ namespace School.API.Controllers
             {
                 return BadRequest(ex.Message);
             }
-            //catch (StudentNameException ex)
-            //{
-            //    return BadRequest($"{ex.StudentName} starts with a digit");
-            //}
+            catch (StudentNameException ex)
+            {
+                return BadRequest($"{ex.StudentName} starts with a digit");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Could not add student to the database");
+            }
         }
 
         private bool StudentIs20OrYounger(DateTime dateOfBirth)
