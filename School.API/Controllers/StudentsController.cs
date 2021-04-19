@@ -37,8 +37,20 @@ namespace School.API.Controllers
             {
                 string stopHere = "Debug";
             }
+        }
 
-            
+        [HttpGet("get-student-by-id/{id}")]
+        public IActionResult GetStudentById(int id)
+        {
+            if (id <= 0) throw new ArgumentException("Please, provide an id > 0");
+
+            var allStudents = _context.Students.ToArray();
+            var studentPosition5 = allStudents[4];
+
+            var studentInfo = _context.Students.FirstOrDefault(n => n.Id == id);
+            var studentFullName = studentInfo.FullName;
+
+            return Ok($"Student name = {studentFullName}");
         }
 
         [HttpPost("add-new-student")]
