@@ -23,19 +23,19 @@ namespace School.API.Data
                         {
                             Id = 1,
                             FullName = "Stephany Ashcraft",
-                            DataOfBirth = new DateTime(2000, 4, 14)
+                            DateOfBirth = new DateTime(2000, 4, 14)
                         },
                 new Student()
                 {
                     Id = 2,
                     FullName = "Olga Lester",
-                    DataOfBirth = new DateTime(1990, 10, 11)
+                    DateOfBirth = new DateTime(1990, 10, 11)
                 },
                 new Student()
                 {
                     Id = 3,
                     FullName = "Charlie Curtis",
-                    DataOfBirth = new DateTime(1997, 8, 24)
+                    DateOfBirth = new DateTime(1997, 8, 24)
                 }
                         );
 

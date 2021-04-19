@@ -62,15 +62,36 @@ namespace School.API.Controllers
             {
                 if (Regex.IsMatch(payload.FullName, @"^\d")) throw new StudentNameException("Name starts with number", payload.FullName);
 
+                if(StudentIs20OrYounger(payload.DateOfBirth)) throw new StudentAgeException($"{payload.FullName} needs to be older than 20. Birth year: {payload.DateOfBirth.Year}");
+
                 _context.Students.Add(payload);
                 _context.SaveChanges();
 
                 return Created("", null);
             }
-            catch (StudentNameException ex)
+            catch (StudentAgeException ex)
             {
-                return BadRequest($"{ex.StudentName} starts with a digit");
+                return BadRequest(ex.Message);
             }
+            //catch (StudentNameException ex)
+            //{
+            //    return BadRequest($"{ex.StudentName} starts with a digit");
+            //}
+        }
+
+        private bool StudentIs20OrYounger(DateTime dateOfBirth)
+        {
+            //today's date
+            var today = DateTime.Today;
+
+            //calculate the age
+            var age = today.Year - dateOfBirth.Year;
+
+            if (dateOfBirth.Date > today.AddYears(-age)) age--;
+
+            if (age <= 20) return true;
+
+            return false;
         }
     }
 }

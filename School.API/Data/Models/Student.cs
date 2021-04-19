@@ -8,6 +8,6 @@ namespace School.API.Data.Models
 
         public string FullName { get; set; }
 
-        public DateTime DataOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }
