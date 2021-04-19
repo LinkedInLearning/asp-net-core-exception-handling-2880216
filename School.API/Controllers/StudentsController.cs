@@ -23,8 +23,22 @@ namespace School.API.Controllers
         [HttpGet("get-all-students")]
         public IActionResult GetAllStudents()
         {
-            var allStudents = _context.Students.ToList();
-            return Ok(allStudents);
+            try
+            {
+                var allStudents = _context.Students.ToList();
+                //throw new Exception("Could not get data from the database");
+                return Ok(allStudents);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            finally
+            {
+                string stopHere = "Debug";
+            }
+
+            
         }
 
         [HttpPost("add-new-student")]
