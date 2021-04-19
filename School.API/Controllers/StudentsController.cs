@@ -2,9 +2,11 @@
 using Microsoft.Extensions.Logging;
 using School.API.Data;
 using School.API.Data.Models;
+using School.API.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace School.API.Controllers
@@ -56,11 +58,19 @@ namespace School.API.Controllers
         [HttpPost("add-new-student")]
         public IActionResult AddNewStudent([FromBody]Student payload)
         {
+            try
+            {
+                if (Regex.IsMatch(payload.FullName, @"^\d")) throw new StudentNameException("Name starts with number", payload.FullName);
 
-            _context.Students.Add(payload);
-            _context.SaveChanges();
+                _context.Students.Add(payload);
+                _context.SaveChanges();
 
-            return Created("", null);
+                return Created("", null);
+            }
+            catch (StudentNameException ex)
+            {
+                return BadRequest($"{ex.StudentName} starts with a digit");
+            }
         }
     }
 }
