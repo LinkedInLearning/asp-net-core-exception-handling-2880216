@@ -41,7 +41,7 @@ namespace School.API.Exceptions
                 Path = httpContext.Request.Path
             }.ToString();
 
-            return httpContext.Response.WriteAsync(errorMessageString)
+            return httpContext.Response.WriteAsync(errorMessageString);
         }
     }
 }

@@ -57,7 +57,8 @@ namespace School.API
             app.UseAuthorization();
 
             //Exception Handlers
-            app.ConfigureBuiltInExceptionHandler();
+            //app.ConfigureBuiltInExceptionHandler();
+            app.ConfigureCustomExceptionHandler();
 
             app.UseEndpoints(endpoints =>
             {

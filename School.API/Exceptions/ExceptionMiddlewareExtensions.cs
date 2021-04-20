@@ -40,5 +40,10 @@ namespace School.API.Exceptions
                 });
             });
         }
+    
+        public static void ConfigureCustomExceptionHandler(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<CustomExceptionHandler>();
+        }
     }
 }
