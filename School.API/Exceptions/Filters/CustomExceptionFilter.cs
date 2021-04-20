@@ -16,12 +16,19 @@ namespace School.API.Exceptions.Filters
         {
             context.HttpContext.Response.ContentType = "application/json";
 
+            var statusCode = HttpStatusCode.InternalServerError;
+
+            if(context.Exception is StudentNameException)
+            {
+                statusCode = HttpStatusCode.NotFound;
+            }
+
             var exceptionString = new ErrorResponseData()
             {
-                StatusCode = (int)HttpStatusCode.InternalServerError,
+                StatusCode = (int)statusCode,
                 Message = context.Exception.Message,
                 Path = context.Exception.StackTrace
-            }.ToString();
+            };
 
             context.Result = new JsonResult(exceptionString);
         }

@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using School.API.Data;
 using School.API.Data.Models;
 using School.API.Exceptions;
+using School.API.Exceptions.Filters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace School.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+
     public class StudentsController : ControllerBase
     {
         private readonly AppDbContext _context;
@@ -23,9 +25,10 @@ namespace School.API.Controllers
         }
 
         [HttpGet("get-all-students")]
+        [CustomExceptionFilter]
         public IActionResult GetAllStudents()
         {
-            throw new Exception("This is an unhandled exception test");
+            throw new StudentNameException("This is an unhandled exception test");
 
             try
             {
