@@ -25,6 +25,8 @@ namespace School.API.Controllers
         [HttpGet("get-all-students")]
         public IActionResult GetAllStudents()
         {
+            throw new Exception("This is an unhandled exception test");
+
             try
             {
                 var allStudents = _context.Students.ToList();

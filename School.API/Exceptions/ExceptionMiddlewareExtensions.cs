@@ -24,6 +24,8 @@ namespace School.API.Exceptions
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     var contextRequest = context.Features.Get<IHttpRequestFeature>();
 
+                    context.Response.ContentType = "application/json";
+
                     if (contextFeature != null)
                     {
                         var errorString = new ErrorResponseData()

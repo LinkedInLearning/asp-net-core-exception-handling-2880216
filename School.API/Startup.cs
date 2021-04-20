@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using School.API.Data;
+using School.API.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,6 +55,9 @@ namespace School.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            //Exception Handlers
+            app.ConfigureBuiltInExceptionHandler();
 
             app.UseEndpoints(endpoints =>
             {
